@@ -60,6 +60,7 @@
             position: fixed;
             width: 100%;
             bottom: 0;
+            display: none; /* Initially hidden */
         }
     </style>
 </head>
@@ -109,8 +110,19 @@
         </p>
     </section>
 
-    <footer>
+    <footer id="footer"></footer>
         <p>© 2025 Raul Schneider</p>
     </footer>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var footer = document.getElementById('footer');
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                footer.style.display = 'block';
+            } else {
+                footer.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
