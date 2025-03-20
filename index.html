@@ -169,12 +169,17 @@
                 <button id="prev-btn" class="nav-btn" onclick="prevPage()">&#10094;</button>
                 <ul id="projects-list">
                     <li>
+                        <a href="https://github.com/tURb0Lov3R/system-blocker">Unnamed Project</a>
+                        <p>The Unnamed Project enables system administrators to enforce time-sensitive access policies, effectively blocking user access to the system during specified periods. It allows for the precise scheduling of system availability, supporting compliance and security protocols.</p>
+                    </li>
+                    <li>
                         <a href="https://github.com/tURb0Lov3R/xlsxConverter">XLSX Converter</a>
                         <p>xlsxConverter delivers a versatile and robust solution for converting XLSX files to CSV and JSON formats. This tool is perfectly suited for developers and data analysts needing an efficient way to transform and integrate data across various systems and applications.</p>
                     </li>
                     <li>
-                        <a href="https://github.com/tURb0Lov3R/system-blocker">Unnamed Project</a>
-                        <p>The Unnamed Project enables system administrators to enforce time-sensitive access policies, effectively blocking user access to the system during specified periods. It allows for the precise scheduling of system availability, supporting compliance and security protocols.</p>
+                        <a href="https://github.com/tURb0Lov3R/Ceasar-Cipher">Ceaser Cipher</a>
+                        <p>Simple implementation of the Ceaser Cipher algorithm in Python. This tool allows users to encrypt and decrypt messages using a specified shift value. It is a useful resource for learning about encryption and data security.</p>
+                        <p>xlsxConverter delivers a versatile and robust solution for converting XLSX files to CSV and JSON formats. This tool is perfectly suited for developers and data analysts needing an efficient way to transform and integrate data across various systems and applications.</p>
                     </li>
                 </ul>
                 <button id="next-btn" class="nav-btn" onclick="nextPage()">&#10095;</button>
@@ -197,8 +202,8 @@
                 for (let i = start; i < end && i < projects.length; i++) {
                     projects[i].style.display = 'block';
                 }
-                document.getElementById('prev-btn').disabled = page === 1;
-                document.getElementById('next-btn').disabled = page === totalPages;
+                document.getElementById('prev-btn').style.display = page === 1 ? 'none' : 'block';
+                document.getElementById('next-btn').style.display = page === totalPages ? 'none' : 'block';
             }
 
             function prevPage() {
