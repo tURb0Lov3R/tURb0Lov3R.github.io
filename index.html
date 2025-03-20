@@ -6,7 +6,7 @@
     <title>Raul Schneider - Cybersecurity</title>
     <style>
         body {
-            font-family: 'Heveltica', sans-serif;
+            font-family: 'Helvetica', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -65,6 +65,7 @@
             color: #fff;
         }
 
+        /* New Styles for Skills Section */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr); /* 3 columns, equal width */
@@ -74,7 +75,7 @@
         .skills-grid div {
             padding: 10px;
             text-align: center;
-            border: 0px solid #ddd;
+            border: 0px solid #ddd; /* Optional border */
         }
 
         .contacts-grid {
@@ -88,6 +89,64 @@
             text-align: center;
             border: 0px solid #ddd;
         }
+
+        #pagination {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        #pagination button {
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #pagination button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #projects-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        #projects-list {
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            width: 100%;
+        }
+        #projects-list li {
+            flex: 1 0 30%; /* Adjust this value to fit 3 projects per row */
+            display: none;
+            margin: 10px;
+        }
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            z-index: 1;
+        }
+        #prev-btn {
+            left: 0;
+        }
+        #next-btn {
+            right: 0;
+        }
+        .nav-btn:disabled {
+            background-color: rgba(0, 0, 0, 0.2);
+            cursor: not-allowed;
+        }
+
     </style>
 </head>
 <body>
@@ -106,18 +165,60 @@
 
         <section>
             <h2>Projects</h2>
-            <ul>
-                <li>
-                    <a href="https://github.com/tURb0Lov3R/xlsxConverter">XLSX Converter</a>
-                    <p>xlsxConverter delivers a versatile and robust solution for converting XLSX files to CSV and JSON formats. This tool is perfectly suited for developers and data analysts needing an efficient way to transform and integrate data across various systems and applications.</p>
-                </li>
-                <li>
-                    <a href="https://github.com/tURb0Lov3R/system-blocker">Unnamed Project</a>
-                    <p>The Unnamed Project enables system administrators to enforce time-sensitive access policies, effectively blocking user access to the system during specified periods. It allows for the precise scheduling of system availability, supporting compliance and security protocols.</p>
-                </li>
-            </ul>
+            <div id="projects-container">
+                <button id="prev-btn" class="nav-btn" onclick="prevPage()">&#10094;</button>
+                <ul id="projects-list">
+                    <li>
+                        <a href="https://github.com/tURb0Lov3R/xlsxConverter">XLSX Converter</a>
+                        <p>xlsxConverter delivers a versatile and robust solution for converting XLSX files to CSV and JSON formats. This tool is perfectly suited for developers and data analysts needing an efficient way to transform and integrate data across various systems and applications.</p>
+                    </li>
+                    <li>
+                        <a href="https://github.com/tURb0Lov3R/system-blocker">Unnamed Project</a>
+                        <p>The Unnamed Project enables system administrators to enforce time-sensitive access policies, effectively blocking user access to the system during specified periods. It allows for the precise scheduling of system availability, supporting compliance and security protocols.</p>
+                    </li>
+                </ul>
+                <button id="next-btn" class="nav-btn" onclick="nextPage()">&#10095;</button>
+            </div>
         </section>
 
+        <script>
+            const projectsPerPage = 3;
+            let currentPage = 1;
+            const projectsList = document.getElementById('projects-list');
+            const projects = projectsList.getElementsByTagName('li');
+            const totalPages = Math.ceil(projects.length / projectsPerPage);
+
+            function showPage(page) {
+                for (let i = 0; i < projects.length; i++) {
+                    projects[i].style.display = 'none';
+                }
+                const start = (page - 1) * projectsPerPage;
+                const end = start + projectsPerPage;
+                for (let i = start; i < end && i < projects.length; i++) {
+                    projects[i].style.display = 'block';
+                }
+                document.getElementById('prev-btn').disabled = page === 1;
+                document.getElementById('next-btn').disabled = page === totalPages;
+            }
+
+            function prevPage() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    showPage(currentPage);
+                }
+            }
+
+            function nextPage() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    showPage(currentPage);
+                }
+            }
+
+            // Initialize the first page
+            showPage(currentPage);
+        </script>
+        
         <section>
             <h2>Skills</h2>
             <div class="skills-grid">
@@ -128,6 +229,7 @@
                 <div>Linux</div>
                 <div>Windows</div>
                 <div>Bash</div>
+                <div>HTML</div>
                 <div>Nmap</div>
                 <div>Metasploit</div>
             </div>
